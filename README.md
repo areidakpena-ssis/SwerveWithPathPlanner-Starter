@@ -4,7 +4,7 @@ Welcome to the starter repository for our team's **Swerve Drivetrain**. This cod
 
 ---
 
-## 📜 Attribution & References
+## Attribution & References
 
 This project is a modified version of the **CTRE Phoenix 6 SwerveWithPathPlanner** starter project created by **Cross The Road Electronics (CTRE)**.
 
@@ -14,7 +14,7 @@ This project is a modified version of the **CTRE Phoenix 6 SwerveWithPathPlanner
 
 ---
 
-## 🤖 Drivetrain Hardware Overview
+## Drivetrain Hardware Overview
 
 Our swerve drive setup consists of the following components:
 * **Swerve Modules:** 4× SDS MK4i Swerve Modules in the **L2** configuration with **Colson wheels**.
@@ -26,7 +26,7 @@ Our swerve drive setup consists of the following components:
 
 ---
 
-## 📁 Repository & Code Structure (`src/`)
+## Repository & Code Structure (`src/`)
 
 ```text
 src/main/java/frc/robot/
@@ -41,7 +41,7 @@ src/main/java/frc/robot/
 
 ---
 
-## 🛠️ Key Files Deep-Dive
+## Key Files Deep-Dive
 
 ### 1. `TunerConstants.java`
 **Purpose:** Generated initially via CTRE Phoenix Tuner X, this file centralizes all hardware identifiers, mechanical dimensions, sensor offsets, and motor controller PID/Feedforward gains.

@@ -107,3 +107,33 @@ public Command applyRequest(Supplier<SwerveRequest> requestSupplier)
 ```
 * **How it works:** `applyRequest()` takes a lambda function/supplier that delivers a `SwerveRequest` (such as driver joystick inputs updated continuously).
 * **Why it matters:** It converts real-time control requests into a continuously executing WPILib `Command`. In `RobotContainer`, this is set as the drivetrain's **default command**, running every 20ms during teleoperated mode to smoothly update wheel speeds and angles.
+
+
+---
+
+## Student Verification Checklist (To-Dos)
+
+### 1. Verify CAN Bus Assignments
+- [ ] Open Phoenix Tuner X and connect to the robot via the roboRIO CAN bus (`rio`).
+- [ ] Perform a device scan to confirm all 13 swerve devices (8 Talon FX motors, 4 CANcoders, 1 Pigeon 2.0) respond on the bus.
+- [ ] Cross-reference physical device IDs with `TunerConstants.java`:
+  - Pigeon 2.0: 20
+  - Front Left: Drive 21, Steer 22, CANcoder 23
+  - Front Right: Drive 24, Steer 25, CANcoder 26
+  - Back Left: Drive 27, Steer 28, CANcoder 29
+  - Back Right: Drive 30, Steer 31, CANcoder 32
+- [ ] Perform a blink test in Phoenix Tuner X on each device to confirm physical module locations match code definitions.
+
+### 2. Verify Physical Parameters of the Robot
+- [ ] Measure physical wheel radius and update `kWheelRadius` in `TunerConstants.java` if tread wear deviates from the 2.0-inch nominal radius.
+- [ ] Measure module offsets from frame center to ensure `kFrontLeftXPos`, `kFrontLeftYPos`, etc., accurately reflect physical dimensions (+/- 10 inches).
+- [ ] Confirm drive motor gear ratio corresponds to SDS MK4i L2 gearing (6.75 : 1).
+- [ ] Confirm steer motor gear ratio corresponds to 150 / 7 : 1 (~21.43 : 1).
+
+### 3. Verify Steering Motor Gains (`steerGains`)
+- [ ] Elevate the robot chassis securely on blocks so all wheels can rotate freely without ground contact.
+- [ ] Review baseline closed-loop steer gains in `TunerConstants.java` (kP = 100, kI = 0, kD = 0.5, kS = 0.1, kV = 1.91).
+- [ ] Enable the robot in Teleop mode and observe module responsiveness:
+  - Check for high-frequency oscillation or jitter (indicates kP is too high or needs additional kD damping).
+  - Check for sluggish response or static offset (indicates kP or kS feedforward is too low).
+- [ ] Verify wheel zero alignment. Ensure all modules point straight forward at zero heading and update CANcoder offset constants in Phoenix Tuner X if necessary.
